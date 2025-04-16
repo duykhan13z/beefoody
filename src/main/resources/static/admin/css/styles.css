@@ -1,0 +1,306 @@
+.actionBar {
+    margin-bottom: 30px;
+}
+.searchbox {
+    position: relative;
+    width:60%;
+    height:50px;
+}
+.searchbox input {
+    padding-left: 20px; /* Adjust this value based on the size of the icon */
+}
+.search-icon {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%); /* Centers the icon vertically */
+    font-size: 16px; /* Adjust size as needed */
+    color: #888; /* Icon color */
+}
+
+.filterDrop {
+    width: 11%;
+    height:50px;
+}
+.filterA {
+    height:100%;
+}
+.filterDrop.A {
+    margin-left: 4.5%;
+}
+.icon {
+    font-size: 25px;
+    padding-top: 18px;
+}
+.custom-dropdown {
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    height:100%;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-dropdown:focus {
+    border-color: #EF6B27;
+    border-radius: 0px;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+.custom-dropdown.has-selection {
+    background-color: #EF6B27;
+    color: #FCF8EF;
+}
+.custom-dropdown option{
+    border:0px;
+    border-radius:0px;
+}
+.custom-dropdown option:checked {
+    background-color: #EF6B27;
+    color: #FCF8EF;
+}
+.custom-dropdown option:hover {
+    background-color: #EF6B27;
+    color: #FCF8EF;
+}
+
+.addNewP {
+    width:20%;
+    height:50px;
+}
+
+.addNewP .anp {
+    background-color: #EF6B27;
+    color: #FCF8EF;
+    text-decoration: none;
+}
+.addNewP a:hover {
+    background-color: #DD714E;
+    color: #FCF8EF;
+}
+
+
+.btn, .form-control {
+    border-radius: 0px;
+}
+
+/* Custom container for the order details page */
+.order-detail-container {
+    background-color: #f9f9f9;
+    margin:  20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for each column of the order details */
+.order-detail-col {
+    padding-right: 30px;
+}
+
+/* Order ID styling */
+.order-detail-id {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Customer Name */
+.order-detail-customer-name {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Customer Address */
+.order-detail-customer-address {
+    font-size: 1.1rem;
+    color: #777;
+}
+
+/* Styling for the order items section */
+.order-items-col {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Title for order items */
+.order-items-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* List of order items */
+.order-items-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.order-item {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Total Price styling */
+.order-total-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Status Text */
+.order-status-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Custom Background for Completed Orders */
+.order-status-completed {
+    background-color: #28a745 !important;
+    color: #FBFBFB;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Custom Background for Processing Orders */
+.order-status-processing {
+    background-color: #E9B600 !important;
+    color: #FBFBFB;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Styling for Back Button */
+.order-back-btn {
+    margin-top: 20px;
+    background-color: #6c757d;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.order-back-btn:hover {
+    background-color: #5a6268;
+}
+
+/* dashboard */
+/* New Orders Card */
+.order-card {
+    background-color: #28a745 !important;  /* Bootstrap success color */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Add subtle shadow for elevation */
+}
+
+.order-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.order-card .card-text {
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+/* Active Users Card */
+.active-users-card {
+    background-color: #ffc107 !important;  /* Bootstrap warning color */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Add subtle shadow for elevation */
+}
+
+.active-users-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.active-users-card .card-text {
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+/* Order Processed Card */
+.order-processed-card {
+    background-color: #17a2b8 !important;  /* Bootstrap info color */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Add subtle shadow for elevation */
+}
+
+.order-processed-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.order-processed-card .card-text {
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+/* New Customers Card */
+.new-customers-card {
+    background-color: #dc3545 !important;  /* Bootstrap danger color */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Add subtle shadow for elevation */
+}
+
+.new-customers-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.new-customers-card .card-text {
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+#salesChart {
+    margin-top: 30px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for the email announcement form */
+.custom-email-form-container {
+    padding: 30px;
+    background-color: #f8f9fa;
+    margin-top: 40px;
+}
+
+/* Custom form styling */
+.custom-email-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Custom form group styling */
+.custom-form-group {
+    margin-bottom: 20px;
+    margin-top:20px
+}
+
+/* Custom label styling */
+.custom-form-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Custom input and textarea styling */
+.custom-form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+/* Custom submit button styling */
+.custom-submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+
+.custom-submit-btn:hover {
+    background-color: #0056b3;
+}

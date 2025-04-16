@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="nav-md">
+    <div th:fragment="sidebar" class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="#" class="site_title">Njnnger</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/avatar.jpg" alt="Avatar" class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <h2 th:text="${username}"></h2>
+                <span>Administrator</span>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>MAIN MENU</h3>
+                <ul class="nav side-menu">
+                  <li th:classappend="${activePage == 'dashboard' ? ' active' : ''}">
+                    <a th:href="@{/admin/dashboard}"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+                  </li>
+                  <li th:classappend="${activePage == 'orders' || activePage == 'orderDetail' ? ' active' : ''}">
+                    <a th:href="@{/admin/orders}"><i class="fa-solid fa-cart-plus"></i> Orders</a>
+                  </li>
+                  <li th:classappend="${activePage == 'customers' ? ' active' : ''}">
+                    <a th:href="@{/admin/customers}"><i class="fa-solid fa-user-tag"></i> Customers</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>MASTER DATA</h3>
+                <ul class="nav side-menu">
+                  <li th:classappend="${activePage == 'productList' || activePage == 'editFood' || activePage == 'addNewFood' ? ' active' : ''}">
+                    <a th:href="@{/admin/product-list}"><i class="fa-solid fa-layer-group"></i>Product</a>
+                  </li>
+                  <li th:classappend="${activePage == 'userAccount' || activePage == 'userDetail' ? ' active' : ''}">
+                    <a th:href="@{/admin/account}"><i class="fa-solid fa-users"></i> Users </a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="sign-out">
+              <form th:action="@{/logout}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

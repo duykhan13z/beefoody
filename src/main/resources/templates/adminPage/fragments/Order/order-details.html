@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${pageTitle}">Order Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div th:fragment="orderDetail" th:if="${activePage == 'orderDetail'}">
+    <div class="mt-4 order-detail-container">
+      <div class="row">
+        <div class="col-md-6 order-detail-col">
+          <p><strong>Order ID:</strong> <span th:text="${order.id}" class="order-detail-id">#001001</span></p>
+          <p><strong>Customer Name:</strong> <span th:text="${order.customer.firstname + ' ' + order.customer.lastname}" class="order-detail-customer-name">Devon Lane</span></p>
+          <p><strong>Customer Address:</strong> <span th:text="${order.customer.address}" class="order-detail-customer-address">1234 Main St, Apt 5</span></p>
+        </div>
+
+        <div class="col-md-6 order-items-col">
+          <h5 class="order-items-title" >Order Items</h5>
+          <ul th:each="item : ${order.orderMenuItems}" class="order-items-list">
+            <li class="order-item">
+              <span th:text="${item.food.name}" class="order-item-name">Pizza</span> -
+              <span th:text="${item.quantityOrdered}" class="order-item-quantity">2</span> items
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row mt-4 order-details-footer">
+        <div class="col-md-6">
+          <p><strong>Total Price:</strong> <span th:text="${order.price}" class="order-total-price">250</span></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Status:</strong>
+            <span th:class="${order.orderStatus ? 'bg-success order-status-completed' : 'bg-warning order-status-processing'}"
+                  th:text="${order.orderStatus ? 'Completed' : 'Processing'}" class="order-status-text">Processing</span>
+          </p>
+        </div>
+      </div>
+
+      <a th:href="${session.previousPage}" class="btn btn-secondary order-back-btn">Back to Previous Page</a>
+    </div>
+  </div>
+</body>
+</html>

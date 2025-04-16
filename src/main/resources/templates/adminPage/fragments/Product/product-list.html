@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Product List</title>
+</head>
+<body>
+    <div th:fragment="productList" th:if="${activePage == 'productList'}">
+        <div class="container mt-4">
+            <div class="actionBar w-100 d-flex justify-content-between align-items-center" >
+                <!-- Search Box -->
+                <div class="searchbox position-relative">
+                    <form th:action="@{/admin/product-list}" method="get" class="d-flex h-100">
+                        <input type="text" name="search"
+                               class="form-control h-100 pl-5"
+                               placeholder="Search for foods..."
+                               th:value="${search}" />
+                        <input type="hidden" name="rowsPerPage" th:value="${rowsPerPage}" />
+                        <input type="hidden" name="page" value="1" />
+                        <button type="submit" class="btn position-absolute" style="right: 10px; top: 30%;">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        </button>
+                    </form>
+                </div>
+                <!-- Filter Dropdown -->
+                <div class="filterDrop">
+                    <form method="get" th:action="@{/admin/product-list}" class="filterA">
+                        <select class="custom-dropdown form-select" name="available" onchange="this.form.submit()">
+                            <option value="" th:selected="${available == null}">All</option>
+                            <option value="true" th:selected="${available == true}">Available</option>
+                            <option value="false" th:selected="${available == false}">Unavailable</option>
+                        </select>
+                    </form>
+                </div>
+                <!-- Button to Add New Product -->
+                <div class="addNewP">
+                    <a th:href="@{/admin/food/add}" class="w-100 h-100 d-flex align-items-center justify-content-center anp btn">
+                        Add New Product
+                    </a>
+                </div>
+            </div>
+            <!-- Table -->
+            <table class="table table-striped">
+                <thead>
+                <tr class="tblhea">
+                    <th class="tblcell">No</th>
+                    <th class="tblcell">Product</th>
+                    <th class="tblcell">Price</th>
+                    <th class="tblcell">Status</th>
+                    <th class="tblcell">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tblcont" th:each="food, iterStat : ${products}">
+                    <td class="tblcell" th:text="${(currentPage - 1) * rowsPerPage + iterStat.index + 1}"></td>
+                    <td class="tblcell">
+                        <div class="d-flex">
+                            <img th:src="${food.image}" alt="Food Image" class="rounded-circle" style="width: 50px; height: 50px;">
+                            <div class="name d-flex row">
+                                <span th:text="${food.name}"></span>
+                                <span class="small-text" th:text="${food.description}"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tblcell" th:text="'$' + ${food.price}"></td>
+                    <td class="tblcell">
+                        <a th:href="@{'/admin/food/toggle/' + ${food.id} + '?page=' + ${currentPage} + '&rowsPerPage=' + ${rowsPerPage}}"
+                           title="Toggle Status">
+                            <i th:class="${food.isAvailable ? 'fa-solid fa-toggle-on text-success' : 'fa-solid fa-toggle-off text-danger'}"
+                               style="cursor: pointer; font-size: 30px;">
+                            </i>
+                        </a>
+                    </td>
+                    <td class="tblcell">
+                        <div class="dropdown">
+                            <button class="btn btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical" style="font-size: 20px; color: #EF6B27;"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" th:href="@{'/admin/food/edit/' + ${food.id}}">Edit</a></li>
+                                <li><a class="dropdown-item" th:href="@{'/admin/food/delete/' + ${food.id} + '?page=' + ${currentPage} + '&rowsPerPage=' + ${rowsPerPage}}">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between mt-4">
+                <!-- Rows per page selection -->
+                <span>Rows per page:
+                <input type="number" id="rowsPerPage" class="form-control w-auto" value="10" min="1"
+                       th:value="${rowsPerPage}" onchange="updateRowsPerPage()">
+                </span>
+
+                <!-- Pagination controls -->
+                <div>
+                    <a class="btn btn-outline-secondary"
+                       href="javascript:void(0);" onclick="goLeftPage()"
+                       id="prevPageBtn" >
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
+                    <span class="mx-2">
+                    Page
+                    <input type="number" id="pageInput" class="form-control d-inline w-auto"
+                           th:value="${currentPage}" th:max="${totalPages}" min="1" onchange="goToPage()">
+                    of <span id="totalPages" th:text="${totalPages}"></span>
+                    </span>
+                    <a class="btn btn-outline-secondary"
+                       href="javascript:void(0);" onclick="goRightPage()"
+                       id="nextPageBtn" >
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/admin/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/setting.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/header.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/card.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/table.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div th:replace="~{adminPage/fragments/sidebar :: sidebar}"></div>
+
+    <!-- Main Content -->
+    <div class="w-100">
+        <!-- Header -->
+        <div th:replace="~{adminPage/fragments/header :: header}"></div>
+
+        <!-- Body -->
+        <div class="cont">
+            <div th:if="${activePage == 'productList'}"
+                 th:replace="~{adminPage/fragments/Product/product-list :: productList}"></div>
+            <div th:if="${activePage == 'editFood'}"
+                 th:replace="~{adminPage/fragments/Product/edit-food :: editFood}"></div>
+            <div th:if="${activePage == 'addNewFood'}"
+                 th:replace="~{adminPage/fragments/Product/add-food :: addNewFood}"></div>
+            <div th:if="${activePage == 'userAccount'}"
+                 th:replace="~{adminPage/fragments/Users/user-account :: userAccount}"></div>
+            <div th:if="${activePage == 'userDetail'}"
+                 th:replace="~{adminPage/fragments/Users/user-details :: userDetail}"></div>
+            <div th:if="${activePage == 'dashboardPage'}"
+                 th:replace="~{adminPage/fragments/Dashboard/dashboard :: dashboardPage}"></div>
+            <div th:if="${activePage == 'orderList'}"
+                 th:replace="~{adminPage/fragments/Order/orders :: orderList}"></div>
+            <div th:if="${activePage == 'orderDetail'}"
+                 th:replace="~{adminPage/fragments/Order/order-details :: orderDetail}"></div>
+            <div th:if="${activePage == 'customers'}"
+                 th:replace="~{adminPage/fragments/Customer/customers :: customerList}"></div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    var paginationPath = [[${path}]];
+    var totalPages = [[${totalPages}]];
+    const salesData = [[${salesData}]];
+</script>
+<script th:src="@{/admin/js/sidebar.js}"></script>
+<script th:src="@{/admin/js/togglingStatus.js}"></script>
+<script th:src="@{/admin/js/pagination.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:src="@{/admin/js/dashboard.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+</body>
+</html>

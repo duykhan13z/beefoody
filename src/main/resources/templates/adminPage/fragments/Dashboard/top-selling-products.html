@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Selling Products Chart</title>
+</head>
+<body>
+<div th:fragment="topSellingProducts">
+    <div class="container m-2 custom-card top-selling-products">
+        <h3 class="head-text">Top Selling Products</h3>
+        <div class="row">
+            <div th:each="food : ${topSellingFoods}" class="col-3">
+                <div class="product-card">
+                    <img th:src="@{${food.image}}" alt="Food Image" class="img-fluid">
+                    <h5 class="name-text" th:text="${food.name}"></h5>
+                    <p class="price-text" th:text="${food.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

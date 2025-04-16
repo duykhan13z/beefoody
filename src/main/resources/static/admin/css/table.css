@@ -1,0 +1,43 @@
+tr.tblhea {
+    border-style: solid none;
+    border-width: 1.5px;
+    border-color: #000;
+    height: 67px;
+    vertical-align: middle;
+}
+
+tr.tblcont {
+   border-style:none none solid none;
+   border-width: 1px;
+   border-color: #ccc;
+   height: 100px;
+   vertical-align: middle;
+}
+
+.tblcell {
+    text-align: center;
+}
+
+.name {
+    padding-left: 20px
+}
+.name span {
+    text-align: left;
+}
+.small-text {
+    font-size: 14px;
+    color: #818181;
+}
+.text-danger {
+    color: #818181 !important;
+}
+.text-success {
+    color: #EF6B27 !important;
+}
+
+.color1 {
+    color: #EF6B27;
+}
+.color2 {
+    color: #ccc
+}

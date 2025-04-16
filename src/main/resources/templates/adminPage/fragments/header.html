@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <!-- Dynamically set the page title -->
+  <title th:text="${pageTitle}">Title</title> <!-- This will be dynamically set from controller -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div th:fragment="header" class="header bg-white">
+  <div class="w-100 d-flex">
+    <!-- Dynamic Page Path and Title -->
+    <div class="path">
+      <h4 th:text="${pageTitle}">Page Title</h4> <!-- Display the dynamic page title -->
+      <p>
+        <span class="path-text" th:text="${pagePath.substring(0, pagePath.lastIndexOf(' / '))}"></span>
+        <span>/</span>
+        <span class="page-name" th:text="${pagePath.substring(pagePath.lastIndexOf(' / ') + 3)}"></span>
+      </p> <!-- Display the dynamic path -->
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

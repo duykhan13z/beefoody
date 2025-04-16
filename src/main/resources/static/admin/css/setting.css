@@ -1,0 +1,57 @@
+.ccolumn {
+    flex:0 0 auto;
+    width:33%;
+    background: #FCF8EF
+}
+
+.ccolumn.h {
+    height: 100vh;
+}
+.cusU > li.active > .cusC{
+        background-color: #EF6B27;
+        color: #FCF8EF;
+        height:124px;
+}
+.cusU > li > .cusC{
+        height:124px !important;
+}
+.cusB {
+    height:124px;
+}
+
+.cusU > .cusB > .cusC i {
+    font-size: 30px !important;
+    padding-right: 10px;
+}
+
+.small-text2{
+    font-size:12px;
+    margin-top:5px
+}
+.card1{
+    height: fit-content;
+    margin-bottom: 24px;
+    background-color: #FCF8EF;
+    border-radius: 10px;
+}
+.cardt{
+    font-size: 15px;
+    color: #7d7d7d;
+    margin-bottom: 0;
+}
+.cardw {
+    padding-right: 20px;
+}
+.cardc{
+    padding: 24px 16px
+}
+.title1 {
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+.head1 {
+    font-size: 20px;
+}
+.c1 {
+    padding: 0px 20px;
+}

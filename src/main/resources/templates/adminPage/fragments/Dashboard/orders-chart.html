@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Orders Chart</title>
+</head>
+<body>
+<div th:fragment="ordersList">
+    <div class="container m-2 new-orders-list d-flex row custom-card">
+        <h5 class="head-text">New Orders</h5>
+        <div th:each="order : ${orders}" class="new-order-card">
+            <div class="line"></div>
+            <div class="order-info container">
+                <div class="row">
+                    <div class="col flex">
+                        <div class="flex" th:if="${#lists.isEmpty(order.orderMenuItems) == false}">
+                            <img class="order-img rounded-circle" th:src="@{${order.orderMenuItems[0].food.image}}" alt="Product Image" style="width: 50px; height: 50px;">
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <p class="card-text order-id" th:text="'ID: #' + ${order.id}"></p>
+                        <p class="card-text order-items" th:text="${order.totalItems + ' items'}"></p>
+                        <p class="card-text order-price" th:text="${order.price} + 'đ'"></p>
+                    </div>
+                    <div class="col flex">
+                        <div class="view-order-btn">
+                            <a th:href="@{/admin/orders/{id}(id=${order.id})}" class="btn btn-sm btn-outline-primary">
+                                <i class="fa-solid fa-eye"></i> View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

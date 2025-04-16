@@ -1,0 +1,179 @@
+/* ===== Global Styles ===== */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+
+div.container.body {
+    width: 30%;
+    margin: 0;
+    padding: 0;
+    background: #FCF8EF;
+}
+.col-md-3 {
+    width: 100%;
+    padding: 30px;
+    background: #FCF8EF;
+}
+.nav.side-menu, .child_menu{
+    display: flex;
+    flex-direction: column;
+}
+/*logo*/
+.site_title {
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 20px;
+}
+/*Avatar*/
+.profile_pic img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+}
+.profile_info h2 {
+    font-size: 22px;
+}
+.profile_info span {
+    font-size: 16px;
+    color: #C9C9C9;
+    text-align: center;
+}
+
+.profile, .profile_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px
+}
+/*Menu*/
+.menu_section h3 {
+    font-size: 15px;
+    color: #EF6B27;
+}
+.menu_section {
+    margin-bottom:30px;
+}
+/* Style the navigation menu items */
+.nav.side-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Main menu items */
+.nav.side-menu > li {
+    background: #FCF8EF;
+    transition: background 0.3s;
+}
+
+/* Menu links */
+.nav.side-menu > li > a {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    height: 55px;
+    padding: 15px 20px;
+    color: #EF6B27;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+.nav.side-menu > li > a .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Icons inside menu items */
+.nav.side-menu > li > a i {
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+/* Hover effect */
+.nav.side-menu > li:hover > a{
+    background: #EF6B27;
+    color: #FCF8EF;
+}
+
+/* ===== Active State for Main Menu ===== */
+.nav.side-menu > li.active > a {
+    background-color: #EF6B27; /* Active background */
+    color: #FCF8EF; /* Active text color */
+}
+
+/* Child menu (dropdown items) */
+.nav.child_menu {
+    list-style: none;
+    transition: all 0.3s ease;
+}
+.nav.child_menu {
+    display: none;
+}
+/* When expanded */
+.nav.child_menu.show {
+    display: block;
+}
+
+.nav.child_menu li a {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    height: 55px;
+    padding: 15px 20px;
+    font-size: 15px;
+    color: #EF6B27;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.nav.child_menu li a:hover {
+    background: #EF6B27;
+    color: #FCF8EF;
+}
+
+/* Active state for Child menu items */
+.nav.side-menu > li.active .child_menu > li.active > a {
+    background-color: #EF6B27; /* Different color for active product list item */
+    color: #FCF8EF;
+}
+
+.main_menu span.fa {
+    float: right;
+    margin-top: 5px;
+    font-size: 15px;
+    min-width: inherit;
+}
+.nav.side-menu .child_menu i.fa-circle {
+    font-size: 7px;
+    margin-right: 12px;
+    margin-left: 20px;
+}
+
+.sign-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 258px;
+    height: 55px;
+    margin-top: 100px;
+    background: #FCF8EF;
+}
+.sign-out > a {
+    text-decoration: none;
+    color: #D02C4C;
+}
+.sign-out > a > i {
+    padding-right: 20px;;
+}
+.sign-out a:hover {
+    font-size: 20px;
+    transition: 0.3s ease;
+}

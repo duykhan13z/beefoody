@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${pageTitle}">Edit Food</title>
+</head>
+<body>
+  <div th:fragment="editFood" th:if="${activePage == 'editFood'}">
+    <div class="container mt-4">
+      <form th:action="@{'/admin/food/edit/' + ${food.id}}" method="post">
+        <div class="mb-3">
+          <label>Name</label>
+          <input type="text" class="form-control" th:field="${food.name}">
+        </div>
+        <div class="mb-3">
+          <label>Price</label>
+          <input type="number" class="form-control" th:field="${food.price}" step="0.01">
+        </div>
+        <div class="mb-3">
+          <label>Description</label>
+          <textarea class="form-control" th:field="${food.description}"></textarea>
+        </div>
+        <div class="mb-3">
+          <label>Image URL</label>
+          <input type="text" class="form-control" th:field="${food.image}">
+        </div>
+        <div class="mb-3">
+          <label>Available</label>
+          <input type="checkbox" th:field="${food.isAvailable}">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a th:href="@{/admin/product-list(page=${currentPage}, rowsPerPage=${rowsPerPage})}" class="btn btn-secondary">Cancel</a>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

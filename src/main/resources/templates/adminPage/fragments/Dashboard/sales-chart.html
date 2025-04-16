@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Chart</title>
+</head>
+<body>
+<div th:fragment="salesChart" class="container mt-4">
+    <h3>Total Income: <span th:text="${revenue + 'đ'}"></span></h3> <!-- Dynamic sales total -->
+    <canvas id="salesChart" width="400" height="200"></canvas>
+</div>
+</body>
+</html>

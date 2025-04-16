@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${pageTitle}">Orders</title>
+</head>
+<body>
+<div th:fragment="orderList" th:if="${activePage == 'orders'}">
+  <!-- Orders Page Content -->
+  <div class="container mt-4">
+    <div class="actionBar w-100 d-flex align-items-center" >
+      <!-- Search Box -->
+      <div class="searchbox position-relative">
+        <form th:action="@{/admin/orders}" method="get" class="d-flex h-100">
+          <input type="text" class="form-control h-100 pl-5" placeholder="Search for customer..."
+                 th:value="${searchTerm}" name="searchTerm">
+          <button type="submit" class="btn position-absolute" style="right: 10px; top: 30%;">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          </button>
+          <input type="hidden" th:value="${rowsPerPage}" name="rowsPerPage"/>
+          <input type="hidden" th:value="${currentPage}" name="page"/>
+          <input type="hidden" th:value="${sortOrder}" name="sortOrder"/>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Orders Table -->
+    <table class="table table-striped">
+      <thead>
+      <tr class="tblhea">
+        <th class="tblcell">Order Id</th>
+        <th class="tblcell">Customer</th>
+        <th class="tblcell">Total Items</th>
+        <th class="tblcell">Amounts</th>
+        <th class="tblcell">Status</th>
+        <th class="tblcell">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="tblcont" th:each="order, iterStat : ${orders}">
+        <td class="tblcell"  th:text="${order.id}">-</td>
+        <td class="tblcell" >
+          <span th:if="${order.customer != null}" th:text="${order.customer.firstname + ' ' + order.customer.lastname}">Devon Lane</span>
+          <span th:if="${order.customer == null}">No customer assigned</span>
+        </td>
+        <td class="tblcell">
+          <!-- Displaying total number of items in the cart -->
+          <span th:text="${order.totalItems}">Total Items</span>
+        </td>
+        <td class="tblcell" th:text="${order.price}">-</td>
+        <td class="tblcell">
+          <span th:class="${order.orderStatus ? 'color1' : 'color2'}"
+                th:text="${order.orderStatus ? 'New Order' : 'Processing'}">
+          </span>
+        </td>
+        <td class="tblcell">
+          <a th:href="@{/admin/orders/{id}(id=${order.id})}" class="btn btn-sm btn-outline-primary">
+            <i class="fa-solid fa-eye"></i> View
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between mt-4">
+      <!-- Rows per page selection -->
+      <span>Rows per page:
+                <input type="number" id="rowsPerPage" class="form-control w-auto" value="10" min="1"
+                       th:value="${rowsPerPage}" onchange="updateRowsPerPage()">
+                </span>
+
+      <!-- Pagination controls -->
+      <div>
+        <a class="btn btn-outline-secondary"
+           href="javascript:void(0);" onclick="goLeftPage()"
+           id="prevPageBtn" >
+          <i class="fa-solid fa-chevron-left"></i>
+        </a>
+        <span class="mx-2">
+                    Page
+                    <input type="number" id="pageInput" class="form-control d-inline w-auto"
+                           th:value="${currentPage}" th:max="${totalPages}" min="1" onchange="goToPage()">
+                    of <span id="totalPages" th:text="${totalPages}"></span>
+                    </span>
+        <a class="btn btn-outline-secondary"
+           href="javascript:void(0);" onclick="goRightPage()"
+           id="nextPageBtn" >
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

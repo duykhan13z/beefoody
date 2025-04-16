@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a680?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-container {
+            width: 500px;
+            margin: 80px auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border: 2px solid #f5a623;
+        }
+
+        .register-container h2 {
+            font-family: 'Lobster', cursive;
+            color: #2D1312;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            color: #2D1312;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #f5a623;
+            box-shadow: 0 0 8px rgba(245, 166, 35, 0.3);
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: #2D1312;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #fff;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #f5a623;
+            transform: translateY(-2px);
+        }
+
+        .text-danger {
+            font-size: 14px;
+            color: #c62828;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .text-center a {
+            color: #f5a623;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .text-center a:hover {
+            color: #e69500;
+            text-decoration: underline;
+        }
+
+        .register-container::before {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 80px;
+            background: url('https://img.icons8.com/color/100/000000/pizza.png') no-repeat center;
+            background-size: contain;
+            margin: 0 auto 20px;
+        }
+
+        @media (max-width: 576px) {
+            .register-container {
+                width: 90%;
+                padding: 20px;
+                margin: 50px auto;
+            }
+
+            .register-container h2 {
+                font-size: 28px;
+            }
+
+            .form-control, .form-select {
+                font-size: 14px;
+            }
+
+            .form-label {
+                font-size: 14px;
+            }
+
+            .btn-primary {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="register-container">
+                <h2>Register Account</h2>
+                <form th:object="${accountRegistrationRequest}" method="post">
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">First Name:</label>
+                        <input type="text" id="firstname" th:field="*{firstname}" class="form-control">
+                        <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Last Name:</label>
+                        <input type="text" id="lastname" th:field="*{lastname}" class="form-control">
+                        <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" id="email" th:field="*{email}" class="form-control">
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Phone Number:</label>
+                        <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control">
+                        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" id="username" th:field="*{username}" class="form-control" required>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" id="password" th:field="*{password}" class="form-control" required>
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role:</label>
+                        <select id="role" th:field="*{role}" class="form-select" required>
+                            <option value="">Select Role</option>
+                            <option value="customer">Customer</option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <p th:if="${error}" class="text-danger mt-2">${error}</p>
+                </form>
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a href="/login">Return to login page</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

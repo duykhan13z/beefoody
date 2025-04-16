@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${pageTitle}">Customers</title>
+</head>
+<body>
+<div th:fragment="customerList" th:if="${activePage == 'customers'}">
+  <!-- Customers Page Content -->
+  <div class="container mt-4">
+    <div class="actionBar w-100 d-flex align-items-center" >
+      <!-- Search Box -->
+      <div class="searchbox position-relative">
+        <form th:action="@{/admin/customers}" method="get" class="d-flex h-100">
+          <input type="text" class="form-control h-100 pl-5" placeholder="Search for customer..."
+                 th:value="${searchTerm}" name="searchTerm">
+          <button type="submit" class="btn position-absolute" style="right: 10px; top: 30%;">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          </button>
+          <input type="hidden" th:value="${rowsPerPage}" name="rowsPerPage"/>
+          <input type="hidden" th:value="${currentPage}" name="page"/>
+          <input type="hidden" th:value="${sortOrder}" name="sortOrder"/>
+        </form>
+      </div>
+      <!-- Filter Dropdown -->
+      <div class="filterDrop A">
+        <div class="filterA filter dropdown">
+          <button class="h-100 w-100 btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+            <!-- Filter by Total Spent -->
+            <li>
+              <a class="dropdown-item" href="#" th:href="@{/admin/customers(page=${currentPage}, rowsPerPage=${rowsPerPage}, sortOrder='ASC')}" th:text="'Sort by Total Spent Ascending'"></a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" th:href="@{/admin/customers(page=${currentPage}, rowsPerPage=${rowsPerPage}, sortOrder='DESC')}" th:text="'Sort by Total Spent Descending'"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customers Table -->
+    <table class="table table-striped">
+      <thead>
+      <tr class="tblhea">
+        <th class="tblcell">No</th>
+        <th class="tblcell">Name</th>
+        <th class="tblcell">Phone No.</th>
+        <th class="tblcell">Address</th>
+        <th class="tblcell">Total Spent</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Iterate through the customers passed from the controller -->
+      <tr class="tblcont" th:each="customer, iterStat : ${customers}">
+        <td class="tblcell" th:text="${(currentPage - 1) * rowsPerPage + iterStat.index + 1}">1</td>
+        <td class="tblcell">
+          <span th:text="${customer.firstname + ' ' + customer.lastname}">-</span><br/>
+          <span class="small-text" th:text="${customer.account.email}">-</span>
+        </td>
+        <td class="tblcell" th:text="${customer.phoneNumber}">-</td>
+        <td class="tblcell" th:text="${customer.address}">-</td>
+        <td class="tblcell">
+          <span th:text="${customerSummaries[iterStat.index].totalSpent}">-</span><br>
+          <span class="small-text" th:text="${customerSummaries[iterStat.index].totalItems + ' Total Items'}">-</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between mt-4">
+      <!-- Rows per page selection -->
+      <span>Rows per page:
+                <input type="number" id="rowsPerPage" class="form-control w-auto" value="10" min="1"
+                       th:value="${rowsPerPage}" onchange="updateRowsPerPage()">
+                </span>
+
+      <!-- Pagination controls -->
+      <div>
+        <a class="btn btn-outline-secondary"
+           href="javascript:void(0);" onclick="goLeftPage()"
+           id="prevPageBtn" >
+          <i class="fa-solid fa-chevron-left"></i>
+        </a>
+        <span class="mx-2">
+                    Page
+                    <input type="number" id="pageInput" class="form-control d-inline w-auto"
+                           th:value="${currentPage}" th:max="${totalPages}" min="1" onchange="goToPage()">
+                    of <span id="totalPages" th:text="${totalPages}"></span>
+                    </span>
+        <a class="btn btn-outline-secondary"
+           href="javascript:void(0);" onclick="goRightPage()"
+           id="nextPageBtn" >
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

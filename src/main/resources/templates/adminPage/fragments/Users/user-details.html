@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${pageTitle}">Settings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div th:fragment="userDetail" th:if="${activePage == 'userDetail'}">
+    <div class="container mt-4">
+      <!-- Table to display the customer details -->
+      <table class="table table-bordered details-table" th:each="account : ${accounts}">
+        <tr>
+          <th>User ID</th>
+          <td th:text="${account.accountId}">1</td>
+        </tr>
+        <tr>
+          <th>Username</th>
+          <td th:text="${account.username}">username</td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <td th:text="${account.customer.firstname + ' ' + account.customer.lastname}">username</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td th:text="${account.email}">email@example.com</td>
+        </tr>
+        <tr>
+          <th>Phone Number</th>
+          <td th:text="${account.customer.phoneNumber}">123-456-7890</td>
+        </tr>
+        <tr>
+          <th>Role</th>
+          <td th:text="${account.role}">customer</td>
+        </tr>
+      </table>
+
+      <!-- Back to user list button -->
+      <div class="text-center mt-4">
+        <a th:href="@{/admin/account}" class="btn btn-primary">Back to User List</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

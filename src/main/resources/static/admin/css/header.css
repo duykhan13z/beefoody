@@ -1,0 +1,37 @@
+.header {
+    padding: 36px 36px 0px 47px;
+}
+
+div.path h4 {
+    font-size: 48px;
+}
+
+div.path p {
+    font-size: 17px
+}
+
+.path-text {
+    color: #ccc;
+}
+
+.page-name {
+    color: #000;
+}
+
+.but1 {
+    margin-left: 20px;
+    width: 55px;
+    height: 55px;
+    font-size: 16px;
+    color: #000;
+    background-color: transparent;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.but1:hover {
+    background-color: #EF6B27;
+    color: #FCF8EF;
+}

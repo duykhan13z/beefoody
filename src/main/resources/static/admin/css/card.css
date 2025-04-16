@@ -1,0 +1,54 @@
+.container1 {
+    width: 35%;
+}
+.custom-card {
+    background-color: #FCF8EF;
+    border: solid 1px #EF6B27;
+}
+.head-text {
+    padding:20px 12px 20px 12px;
+    font-size:25px;
+}
+.card-title {
+    margin: 0px 12px 20px 0px;
+    font-size:25px;
+}
+.line {
+    background-color: black;
+    height: 1px;
+    margin: 7px 0px;
+}
+
+.flex {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.card-text {
+    margin: 8px 0px;
+}
+
+.sbtn {
+    background-color: #EF6B27;
+    color: #FCF8EF;
+    border-color: #EF6B27;
+}
+
+.sbtn:hover {
+    background-color: #DD714E;
+    color: #FCF8EF;
+    border-color: #DD714E;
+}
+
+.sbtn:active {
+    background-color: #EF6B27;
+    color: #FCF8EF;
+    border-color: #EF6B27;
+}
+.price-text {
+    text-align: center;
+}
+.name-text {
+    padding-top: 15px;
+    text-align: center;
+}

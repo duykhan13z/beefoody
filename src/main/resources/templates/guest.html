@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napoletane Pizza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles-2.css}">
+    <style>
+        /* Cart Icon Button */
+        .cart-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #2D1312;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            z-index: 1000;
+        }
+
+        .cart-btn:hover {
+            background-color: #e69500;
+        }
+
+        .cart-btn i {
+            font-size: 24px;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 80px; /* Adjusted to avoid overlapping with cart button */
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #2D1312;
+            color: #fff;
+            border-radius: 50%;
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            z-index: 1000;
+        }
+
+        .scroll-top-btn.show {
+            display: flex;
+        }
+
+        .scroll-top-btn:hover {
+            background-color: #472625;
+        }
+
+        .scroll-top-btn i {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <nav>
+        <div class="logo">Napoletane Pizza</div>
+        <button class="hamburger" aria-label="Toggle menu">☰</button>
+        <div class="nav-links">
+            <a href="#menu">Menu</a>
+            <a href="#services">About Us</a>
+            <a href="#location">Location</a>
+            <a href="#promotion">Contact</a>
+        </div>
+        <div class="Login">
+            <form th:action="@{/login}" method="get" style="display:inline;">
+                <button class="order-btn" type="submit">Đăng nhập</button>
+            </form>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Made by Napoletane.<br>Loved by all.</h1>
+    <div class="hero-image">
+        <img th:src="@{/images/backpizza.png}" alt="Background Pizza" class="back-pizza">
+        <img th:src="@{/images/pizza.png}" alt="Napoletane Pizza" class="front-pizza">
+        <img th:src="@{/images/leaf1.png}" alt="Basil Leaf 1" class="basil-1">
+    </div>
+</section>
+<!-- Menu Section -->
+<section id="menu" class="menu">
+    <h2>Menu</h2>
+    <p>Khám phá những chiếc pizza đặc sắc, nóng hổi vừa ra lò!</p>
+    <div class="menu-grid">
+        <div class="menu-item" th:each="food : ${dishes}">
+            <img th:src="@{/images/pizza.png}" alt="Pizza">
+            <h3 th:text="${food.name}">Pizza Name</h3>
+            <p th:text="${#numbers.formatCurrency(food.price)}">$14.99</p>
+            <form th:action="@{/cart/items/add}" method="post">
+                <div class="quantity-wrapper">
+                    <button type="button" class="quantity-btn minus" id ="numberMenu" aria-label="Decrease quantity">−</button>
+                    <input type="number" name="quantity" value="1" min="1" />
+                    <button type="button" class="quantity-btn plus" id ="numberMenu2"  aria-label="Increase quantity">+</button>
+                </div>
+                <input type="hidden" name="foodId" th:value="${food.id}" />
+                <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<!-- Location Section -->
+<section id="location" class="location">
+    <div class="location-image">
+        <img th:src="@{/images/location.png}" alt="Restaurant Location">
+    </div>
+    <div class="location-content">
+        <h2>Location</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl tincidunt dis risus, vel libero in nisl amet. Ultricies ut vestibulum, ultricies eu suspendisse. Viverra rutrum eleifend urna neque in pretium arcu. Non dis dolor ipsum morbi faucibus sem. Neque, blandit adipiscing morbi dignissim elit lobortis orci ultricies amet. Etiam diam urna duis lorem. Convallis eleifend morbi ut nec pellentesque pulvinar.</p>
+        <button>Find Us</button>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services">
+    <h2>Our Service</h2>
+    <div class="service-grid">
+        <div class="service-item">
+            <img th:src="@{/images/food.png}" alt="Order Food">
+            <h3>Order Your Food</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="service-item">
+            <img th:src="@{/images/delivery.png}" alt="Delivery">
+            <h3>Delivery Or Pick Up</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="service-item">
+            <img th:src="@{/images/recipes.png}" alt="Recipes">
+            <h3>Delicious Recipes</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Promotion Section -->
+<section id="promotion" class="promotion">
+    <div class="text">
+        <h1>Pizza</h1>
+        <h2>Of The Month</h2>
+        <br>
+        <h3>The Big <h1>BIRD</h1></h3>
+    </div>
+    <div class="promo-content">
+        <img th:src="@{/images/banner.png}" alt="Promotional Pizza">
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+    <div class="text-promo">
+        <p><b>PLEASE ENTER YOUR EMAIL TO GET UPDATES ON THE LATEST DISCOUNT CODE</b></p>
+    </div>
+    <form>
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Subscribe</button>
+    </form>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-links">
+        <a href="#">Menu</a>
+        <a href="#">Who we are</a>
+        <a href="#">Events</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="center-footer">
+        <div class="footer-logo">La Pizza Popolare</div>
+        <div class="social-links">
+            <a href="#"><img th:src="@{/images/fb.png}" alt="Facebook"></a>
+            <a href="#"><img th:src="@{/images/ig.png}" alt="Instagram"></a>
+            <a href="#"><img th:src="@{/images/tw.png}" alt="Twitter"></a>
+            <a href="#"><img th:src="@{/images/yt.png}" alt="YouTube"></a>
+        </div>
+    </div>
+    <div class="social-newsletter">
+        <div class="newsletter-form">
+            <label for="email">Sign up to our newsletter</label>
+            <input type="email" id="email" placeholder="Email">
+            <button type="submit">Subscribe</button>
+        </div>
+    </div>
+</footer>
+
+<!-- Cart Button -->
+<button class="cart-btn" th:onclick="|window.location.href='/cart'|">
+    <i class="fas fa-shopping-cart"></i>
+</button>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-top-btn">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Scripts -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Quantity buttons functionality
+        document.querySelectorAll(".quantity-wrapper").forEach(wrapper => {
+            const input = wrapper.querySelector("input");
+            const minusBtn = wrapper.querySelector(".minus");
+            const plusBtn = wrapper.querySelector(".plus");
+
+            if (minusBtn) {
+                minusBtn.addEventListener("click", () => {
+                    let value = parseInt(input.value);
+                    if (value > 1) {
+                        input.value = value - 1;
+                    }
+                });
+            }
+
+            if (plusBtn) {
+                plusBtn.addEventListener("click", () => {
+                    let value = parseInt(input.value);
+                    input.value = value + 1;
+                });
+            }
+        });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 60,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Handle fragment identifier on page load
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            const targetSection = document.getElementById(hash);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 60,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Scroll to top button functionality
+        const scrollTopBtn = document.querySelector('.scroll-top-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling 300px
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/popup.js}"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

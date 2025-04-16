@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div th:fragment="userAccount" th:if="${activePage == 'userAccount'}">
+    <div class="container mt-4">
+        <div class="actionBar w-100 d-flex align-items-center" >
+            <!-- Search Box -->
+            <div class="searchbox position-relative">
+                <form th:action="@{/admin/account}" method="get" class="d-flex h-100">
+                    <input type="text" name="search"
+                           class="form-control h-100 pl-5"
+                           placeholder="Search for username..."
+                           th:value="${search}" />
+                    <input type="hidden" name="rowsPerPage" th:value="${rowsPerPage}" />
+                    <input type="hidden" name="page" value="1" />
+                    <button type="submit" class="btn position-absolute" style="right: 10px; top: 30%;">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </button>
+                </form>
+            </div>
+            <!-- Role Filter Dropdown -->
+            <div class="filterDrop A">
+                <form method="get" th:action="@{/admin/account}" class="filterA">
+                    <select class="custom-dropdown form-select" name="role" onchange="this.form.submit()">
+                        <option value="" th:selected="${role == null}">All Roles</option>
+                        <option value="Customer" th:selected="${role == 'Customer'}">Customer</option>
+                        <option value="Manager" th:selected="${role == 'Manager'}">Manager</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <!-- Users List -->
+        <div class="user-list">
+            <table class="table table-striped">
+                <thead>
+                <tr class="tblhea">
+                    <th class="tblcell">ID</th>
+                    <th class="tblcell">Username</th>
+                    <th class="tblcell">Email</th>
+                    <th class="tblcell">Role</th>
+                    <th class="tblcell">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tblcont" th:each="account, iterStat : ${accounts}">
+                    <td class="tblcell" th:text="${account.accountId}"></td>
+                    <td class="tblcell" th:text="${account.username}"></td>
+                    <td class="tblcell" th:text="${account.email}"></td>
+                    <td class="tblcell" th:text="${account.role}"></td>
+                    <td class="tblcell">
+                        <a th:href="@{'/admin/account/' + ${account.accountId}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa-solid fa-eye"></i> View
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between mt-4">
+            <!-- Rows per page selection -->
+            <span>Rows per page:
+                <input type="number" id="rowsPerPage" class="form-control w-auto" value="10" min="1"
+                       th:value="${rowsPerPage}" onchange="updateRowsPerPage()">
+                </span>
+
+            <!-- Pagination controls -->
+            <div>
+                <a class="btn btn-outline-secondary"
+                   href="javascript:void(0);" onclick="goLeftPage()"
+                   id="prevPageBtn" >
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <span class="mx-2">
+                    Page
+                    <input type="number" id="pageInput" class="form-control d-inline w-auto"
+                           th:value="${currentPage}" th:max="${totalPages}" min="1" onchange="goToPage()">
+                    of <span id="totalPages" th:text="${totalPages}"></span>
+                    </span>
+                <a class="btn btn-outline-secondary"
+                   href="javascript:void(0);" onclick="goRightPage()"
+                   id="nextPageBtn" >
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
